@@ -6,7 +6,8 @@ Vue.component('show-case',{
         <section class="showcase" id="showCaseID">
             <img src="images/people2.jpg">  
             <div class="showcase--text">
-                <h1>Edit your image with our filter</h1>
+                <h1 style="font-size:3em;padding:5vh 0;font-weight:bold">You can...</h1>
+                <h1>edit your image with our filter</h1>
                 <input v-model="currentValue" type="range" class="slider">
                 <p id="value">{{ currentValue }}</p>
             </div>   

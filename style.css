@@ -170,8 +170,9 @@ a
 
 .showcase--text h1
 {
-    font-size: 3em;
+    font-size: 2em;
     color: #103049;
+    font-weight: normal;    
     font-family: 'Questrial', sans-serif;
 }
 
@@ -224,6 +225,11 @@ a
     {
         padding: 0vh;
         grid-column: 1/4;
+    }
+
+    .showcase--text h1
+    {
+        font-size: 1.5em;
     }
 
     .showcase .slider
