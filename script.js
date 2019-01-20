@@ -1,6 +1,24 @@
 
 
 //import NavItems from "/components/nav-items.vue";
+Vue.component('show-case',{
+    template:`
+        <section class="showcase" id="showCaseID">
+            <img src="images/people2.jpg">  
+            <div class="showcase--text">
+                <h1>Edit your image with our filter</h1>
+                <input v-model="currentValue" type="range" class="slider">
+                <p id="value">{{ currentValue }}</p>
+            </div>   
+        </section>
+    `,
+    data(){
+        return{
+            currentValue:0
+        }
+    }
+})
+
 
 Vue.component('NavItems',{
     template:`

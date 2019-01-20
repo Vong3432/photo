@@ -80,7 +80,7 @@ a
     position: relative;       
     z-index: -1;
     width: 100%; 
-    min-height: 70vh;
+    min-height: 100vh;
     height: 100%;
     background-image: url('images/heroImage.jpg');
     background-color: rgba(0,0,0,0.5); 
@@ -148,6 +148,7 @@ a
     padding: 5vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    justify-items: center;
 }
 
 .showcase img
@@ -156,6 +157,29 @@ a
     grid-column: 1/2;
     box-shadow: 10px 0px 50px 0px rgba(0, 0, 0, 0.3),
                -10px 0px 50px 0px rgba(0, 0, 0, 0.3);
+}
+
+.showcase--text
+{
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    grid-column: 2/4;
+    padding: 2vh 5vh;   
+}
+
+.showcase--text h1
+{
+    font-size: 3em;
+    color: #103049;
+    font-family: 'Questrial', sans-serif;
+}
+
+.showcase--text .slider
+{
+    padding: 10vh 0;
+    max-width: 500px;
+    width: 100%;
 }
 
 @media screen and (max-width:600px)
@@ -172,7 +196,7 @@ a
 
     .heroImage
     {
-        min-height: 80vh;
+        min-height: 100vh;
     }
 
     .heroText h1
@@ -185,8 +209,25 @@ a
         font-size: 1em;
     }
 
+    .showcase
+    {        
+        padding-top:15vh;
+        grid-gap: 5vh;
+    }
+
     .showcase img
-    {
+    {        
         grid-column: 1/4;
+    }
+
+    .showcase--text
+    {
+        padding: 0vh;
+        grid-column: 1/4;
+    }
+
+    .showcase .slider
+    {
+        padding: 5vh;
     }
 }
