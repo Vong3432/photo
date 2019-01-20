@@ -1,4 +1,4 @@
-import singleFile from "/components/singleFile.js";
+
 
 //import NavItems from "/components/nav-items.vue";
 
@@ -53,9 +53,6 @@ new Vue({
     data:{
        
     },
-    components:{
-        singleFile
-    }
 })
 
 $(window).scroll(function(){
