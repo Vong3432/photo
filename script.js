@@ -4,7 +4,7 @@
 Vue.component('show-case',{
     template:`
         <section class="showcase" id="showCaseID">
-            <img src="images/people2.jpg" :style="{ filter: filterName[0].name+'('+filterName[0].value/40 +')' }">  
+            <img src="images/people2.jpg" :style="{ filter: testFilter }">  
             <div class="showcase--text">                
                 <h1>Try to adjust the slider to test the filter.</h1>
                 <input v-model="filterName[0].value" type="range" class="slider">
@@ -23,7 +23,9 @@ Vue.component('show-case',{
         }
     },
     computed: {  
-          
+          testFilter(){
+              return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
+          }
     },
 })
 
