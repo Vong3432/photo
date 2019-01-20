@@ -48,7 +48,7 @@ Vue.component('navigation-bar',{
     `,    
 })
 
-new Vue({
+var app = new Vue({
     el:"#app",
     data:{
        
