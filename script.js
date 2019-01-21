@@ -41,8 +41,10 @@ Vue.component('show-case',{
             ctx.drawImage(theImg,0,0,canvas.width,canvas.height)
             const link = document.createElement('a')
             link.href = canvas.toDataURL()
-            link.download = "image"+ this.photoNumber +".png"
-            link.click()
+            const w = window.open('about:blank','image from canvas');
+            w.document.write("<img src='"+link+"' alt='from canvas'/>")
+            // link.download = "image"+ this.photoNumber +".png"
+            // link.click()
         },
         onFileChanged(e){
             const file = e.target.files[0]
