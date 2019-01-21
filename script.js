@@ -4,7 +4,7 @@
 Vue.component('show-case',{
     template:`
         <section class="showcase" id="showCaseID">
-            <img id="myImg" :src="currentImage()" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
+            <img id="myImg" :src="currentImage" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
             <div class="showcase--text">                
                 <h1>Try to adjust the slider to test the saturation filter.</h1>
                 <input v-model="filterName[0].value" type="range" class="slider">
@@ -32,7 +32,7 @@ Vue.component('show-case',{
     methods: {
         download(){
             this.photoNumber++
-          /*   const canvas = document.createElement('canvas');
+            const canvas = document.createElement('canvas');
             canvas.width = 1200
             canvas.height = 800
            const ctx = canvas.getContext('2d')
@@ -42,9 +42,9 @@ Vue.component('show-case',{
              const link = document.createElement('a')
             link.href = canvas.toDataURL()
             link.download = "image"+ this.photoNumber +".png"
-            link.click()*/
+            link.click()
         
-            var w=window.open('about:blank','image from canvas')
+            /*var w=window.open('about:blank','image from canvas')
             w.document.write(`
             <h1>
                 <button 
@@ -63,21 +63,21 @@ Vue.component('show-case',{
                 </button>
             </h1>
             `)
-            w.document.write("<img src='"+this.currentImage()+"' style='width:1200px;height:800px;filter:"+this.testFilter+"' alt='from canvas'/> ")
+            w.document.write("<img src='"+this.currentImage()+"' style='width:1200px;height:800px;filter:"+this.testFilter+"' alt='from canvas'/> ")*/
         },
         onFileChanged(e){
             const file = e.target.files[0]
             this.selectedFile = URL.createObjectURL(file)                        
-        },
-        currentImage(){
-            return this.selectedFile
-        }
+        },       
         
     },
     computed: {  
           testFilter(){
               return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
           },
+          currentImage(){
+            return this.selectedFile
+        }
           
     },
     // mounted() {
