@@ -4,7 +4,7 @@
 Vue.component('show-case',{
     template:`
         <section class="showcase" id="showCaseID">
-            <img id="myImg" :src="currentImage" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
+            <img id="myImg" :src="currentImage()" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
             <div class="showcase--text">                
                 <h1>Try to adjust the slider to test the saturation filter.</h1>
                 <input v-model="filterName[0].value" type="range" class="slider">
@@ -44,12 +44,33 @@ Vue.component('show-case',{
             link.download = "image"+ this.photoNumber +".png"
             link.click()*/
         
-            var w=window.open('about:blank','image from canvas');
-            w.document.write("<img src='"+this.currentImage+"' style='width:1200px;height:800px;filter:"+this.testFilter+"' alt='from canvas'/> ");
+            var w=window.open('about:blank','image from canvas')
+            w.document.write(`
+            <h1>
+                <button 
+                    onclick='window.close()'
+                    style="
+                            font-family: 'Questrial', sans-serif;
+                            padding:20px 30px;
+                            border:none;
+                            color:white;
+                            font-size:0.6em;
+                            width:250px;
+                            border-radius:50px;
+                            background:linear-gradient(to right,rgba(44, 130, 201, 1),#9b59b6);
+                ">
+                    Close
+                </button>
+            </h1>
+            `)
+            w.document.write("<img src='"+this.currentImage()+"' style='width:1200px;height:800px;filter:"+this.testFilter+"' alt='from canvas'/> ")
         },
         onFileChanged(e){
             const file = e.target.files[0]
             this.selectedFile = URL.createObjectURL(file)                        
+        },
+        currentImage(){
+            return this.selectedFile
         }
         
     },
@@ -57,9 +78,7 @@ Vue.component('show-case',{
           testFilter(){
               return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
           },
-          currentImage(){
-              return this.selectedFile
-          }
+          
     },
     // mounted() {
     //     this.$refs.img.src = this.currentImage
@@ -119,6 +138,11 @@ var app = new Vue({
        
     },
 })
+
+function closeTab()
+{
+    window.close();
+}
 
 $(window).scroll(function(){
    var wScroll = $(window).scrollTop();

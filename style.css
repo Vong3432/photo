@@ -239,6 +239,12 @@ input[type="file"]
     background-color: #D24843;
 }
 
+.closeBtn
+{
+    font-size: 5em;
+    background:linear-gradient(to right,rgba(44, 130, 201, 1),#9b59b6);
+}
+
 @media screen and (max-width:900px)
 {
     .navItem
