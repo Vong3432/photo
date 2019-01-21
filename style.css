@@ -289,11 +289,16 @@ input[type="file"]
     .showcase--text h1
     {
         padding: 1vh 0;        
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
 
     .showcase .slider
     {
         padding: 3vh;
     }
+
+     .uploadBtn,.downloadBtn,.showcase--text #value
+     {
+         font-size: 1.1em;
+     }
 }
