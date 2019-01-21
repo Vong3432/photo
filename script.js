@@ -4,7 +4,7 @@
 Vue.component('show-case',{
     template:`
         <section class="showcase" id="showCaseID">
-            <img id="myImg" :src="currentImage" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
+            <img id="myImg" :src="currentImage()" crossOrigin="Anonymous" :style="{ filter: testFilter() }">  
             <div class="showcase--text">                
                 <h1>Try to adjust the slider to test the saturation filter.</h1>
                 <input v-model="filterName[0].value" type="range" class="slider">
@@ -30,6 +30,12 @@ Vue.component('show-case',{
         }
     },
     methods: {
+        currentImage(){
+            return this.selectedFile
+        },
+        testFilter(){
+            return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
+        },
         download(){
             this.photoNumber++
             const canvas = document.createElement('canvas');
@@ -51,12 +57,8 @@ Vue.component('show-case',{
         
     },
     computed: {  
-          testFilter(){
-              return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
-          },
-          currentImage(){
-              return this.selectedFile
-          }
+          
+          
     },
     // mounted() {
     //     this.$refs.img.src = this.currentImage

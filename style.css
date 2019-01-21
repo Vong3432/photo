@@ -239,7 +239,7 @@ input[type="file"]
     background-color: #D24843;
 }
 
-@media screen and (max-width:600px)
+@media screen and (max-width:900px)
 {
     .navItem
     {
