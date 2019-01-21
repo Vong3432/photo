@@ -32,19 +32,20 @@ Vue.component('show-case',{
     methods: {
         download(){
             this.photoNumber++
-            const canvas = document.createElement('canvas');
+          /*   const canvas = document.createElement('canvas');
             canvas.width = 1200
             canvas.height = 800
-            const ctx = canvas.getContext('2d')
+           const ctx = canvas.getContext('2d')
             ctx.filter = this.testFilter
             const theImg = document.getElementById('myImg')
             ctx.drawImage(theImg,0,0,canvas.width,canvas.height)
-            const link = document.createElement('a')
+             const link = document.createElement('a')
             link.href = canvas.toDataURL()
-            const w = window.open('about:blank','image from canvas');
-            w.document.write("<img src='"+link+"' alt='from canvas'/>")
-            // link.download = "image"+ this.photoNumber +".png"
-            // link.click()
+            link.download = "image"+ this.photoNumber +".png"
+            link.click()*/
+        
+            var w=window.open('about:blank','image from canvas');
+            w.document.write("<img src='"+this.currentImage+"' style='width:1200px;height:800px;filter:"+this.testFilter+"' alt='from canvas'/> ");
         },
         onFileChanged(e){
             const file = e.target.files[0]
