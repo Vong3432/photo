@@ -4,11 +4,16 @@
 Vue.component('show-case',{
     template:`
         <section class="showcase" id="showCaseID">
-            <img src="images/people2.jpg" :style="{ filter: testFilter }">  
+            <img id="myImg" :src="currentImage" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
             <div class="showcase--text">                
-                <h1>Try to adjust the slider to test the filter.</h1>
+                <h1>Try to adjust the slider to test the saturation filter.</h1>
                 <input v-model="filterName[0].value" type="range" class="slider">
-                <p id="value">{{ filterName[0].value }}</p>
+                <p id="value">Saturate: ( <span class="valueColor">{{ filterName[0].value }}</span> )</p>
+                <button @click="download" class="downloadBtn">Download</button>
+                <label for="file-upload" class="uploadBtn">    
+                    <p>Upload your image</p>                
+                </label>
+                <input type="file" @change="onFileChanged" id="file-upload">                
             </div>   
         </section>
     `,
@@ -19,14 +24,43 @@ Vue.component('show-case',{
                     name:"saturate",
                     value:50
                }
-            ]               
+            ],
+            selectedFile:'images/people2.jpg',
+            photoNumber:0              
         }
+    },
+    methods: {
+        download(){
+            this.photoNumber++
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200
+            canvas.height = 800
+            const ctx = canvas.getContext('2d')
+            ctx.filter = this.testFilter
+            const theImg = document.getElementById('myImg')
+            ctx.drawImage(theImg,0,0,canvas.width,canvas.height)
+            const link = document.createElement('a')
+            link.href = canvas.toDataURL()
+            link.download = "image"+ this.photoNumber +".png"
+            link.click()
+        },
+        onFileChanged(e){
+            const file = e.target.files[0]
+            this.selectedFile = URL.createObjectURL(file)                        
+        }
+        
     },
     computed: {  
           testFilter(){
               return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
+          },
+          currentImage(){
+              return this.selectedFile
           }
     },
+    // mounted() {
+    //     this.$refs.img.src = this.currentImage
+    // },
 })
 
 

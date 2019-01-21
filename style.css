@@ -10,7 +10,11 @@
 a
 {
     text-decoration: none;
-    color: black;    
+    color: black;   
+}
+
+a,p
+{     
     font-family: 'Questrial', sans-serif;
 }
 
@@ -169,6 +173,7 @@ a
     padding: 2vh 5vh;   
 }
 
+
 .showcase--text h1
 {
     font-size: 2em;
@@ -179,9 +184,59 @@ a
 
 .showcase--text .slider
 {
-    padding: 10vh 0;
+    padding: 5vh 0;
     max-width: 500px;
     width: 100%;
+}
+
+.showcase--text #value
+{    
+    color: rgb(85, 81, 81);
+    font-size: 1.4em;
+    padding-bottom: 5vh;
+}
+
+.valueColor
+{
+    font-size: 1em;
+    color: #5E70C1;
+    font-weight: bold;
+}
+
+.uploadBtn,.downloadBtn
+{
+    margin: 10px;
+    border-radius: 50px;
+    border: none;
+    padding: 20px 30px;
+    font-size: 1.1em;
+    color: white;
+    outline: none;
+    width: 250px;
+    cursor: pointer;
+    transition: box-shadow 300ms ease-in-out;
+}
+
+.uploadBtn:hover,.downloadBtn:hover
+{
+    box-shadow: 5px 0px 50px 0px rgba(0, 0, 0, 0.15),
+               -5px 0px 50px 0px rgba(0, 0, 0, 0.15);
+}
+
+.downloadBtn
+{ 
+    background-color: #695ED8;
+}
+
+input[type="file"]
+{
+    display: none;
+}
+
+.uploadBtn
+{    
+    display: inline-block;    
+    background-color: #D24843;
 }
 
 @media screen and (max-width:600px)
