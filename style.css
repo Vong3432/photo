@@ -153,6 +153,7 @@ a
 
 .showcase img
 {
+    z-index: -1;
     width: 100%;
     grid-column: 1/2;
     box-shadow: 10px 0px 50px 0px rgba(0, 0, 0, 0.3),
