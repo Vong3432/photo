@@ -60,10 +60,15 @@ a,p
 
 .navItem a
 {                   
-    color: rgb(228, 225, 225);
+    color: rgb(177, 172, 172);
     font-size: 1.1em;         
     padding: 10px 20px;
-    transition: color 500ms ease-in-out;
+    transition: opacity,color 500ms ease-in-out;
+}
+
+.navItem a:hover
+{
+    opacity: 0.8;
 }
 
 .active
@@ -149,19 +154,25 @@ a,p
 
 .showcase
 {
-    padding: 5vh;
+    padding: 5vh 10vh;    
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    grid-template-rows: minmax(auto,auto) minmax(auto,auto);
+    justify-items: center;    
+    align-items: center;
+    min-height: 80vh;
+    height: 100%;        
 }
 
-.showcase img
-{
+.showcase--image
+{            
+    
     z-index: -1;
-    width: 100%;
-    grid-column: 1/2;
-    box-shadow: 10px 0px 50px 0px rgba(0, 0, 0, 0.3),
-               -10px 0px 50px 0px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    width: 100%;    
+    grid-column: 1/2; 
+    box-shadow: 5px 0px 50px 0px rgba(0, 0, 0, 0.2),
+               -5px 0px 50px 0px rgba(0, 0, 0, 0.2);
 }
 
 .showcase--text
@@ -169,10 +180,9 @@ a,p
     width: 100%;
     text-align: center;
     align-self: center;
-    grid-column: 2/4;
+    grid-column: 2/4; 
     padding: 2vh 5vh;   
 }
-
 
 .showcase--text h1
 {
@@ -206,21 +216,22 @@ a,p
 .uploadBtn,.downloadBtn
 {
     margin: 10px;
-    border-radius: 50px;
+    border-radius: 10px;
     border: none;
-    padding: 20px 30px;
-    font-size: 1.1em;
+    padding: 20px 10px;
+    font-size: 1em;
     color: white;
     outline: none;
-    width: 250px;
+    width: 200px;
     cursor: pointer;
-    transition: box-shadow 300ms ease-in-out;
+    transition: opacity,box-shadow 300ms ease-in-out;
 }
 
 .uploadBtn:hover,.downloadBtn:hover
 {
-    box-shadow: 5px 0px 50px 0px rgba(0, 0, 0, 0.15),
-               -5px 0px 50px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 5px 0px 50px 0px rgba(0, 0, 0, 0.1),
+               -5px 0px 50px 0px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
 }
 
 .downloadBtn
@@ -247,6 +258,11 @@ input[type="file"]
 
 @media screen and (max-width:900px)
 {
+    main
+    {
+        margin-top: 50px !important;
+    }
+
     .navItem
     {
         justify-content: center;
@@ -277,7 +293,9 @@ input[type="file"]
 
     .showcase
     {        
-        padding-top:15vh;
+        padding-right:4vh;
+        padding-left: 4vh;
+        padding-top:10vh;
         grid-gap: 5vh;
     }
 

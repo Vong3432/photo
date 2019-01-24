@@ -1,32 +1,29 @@
 
 
 //import NavItems from "/components/nav-items.vue";
-Vue.component('show-case',{
+Vue.component('showcase-item',{
+    props:{
+        parentObj:{}
+    },
     template:`
-        <section class="showcase" id="showCaseID">
-            <img id="myImg" :src="currentImage" crossOrigin="Anonymous" :style="{ filter: testFilter }">  
-            <div class="showcase--text">                
-                <h1>Try to adjust the slider to test the saturation filter.</h1>
-                <input v-model="filterName[0].value" type="range" class="slider">
-                <p id="value">Saturate: ( <span class="valueColor">{{ filterName[0].value }}</span> )</p>
+        <span class="showcase" id="showCaseID">
+            <showcase-img :imgSource="parentObj.src" :filterEffect="parentObj.name" :filterValue="testFilter"/>    
+            <div class="showcase--text"> 
+                    
+                <h1>Try to adjust the slider to test the {{parentObj.name}} filter.</h1>            
+                <input v-model="parentObj.value" type="range" class="slider">
+                <p id="value">{{parentObj.name}} ( <span class="valueColor">{{ parentObj.value }}</span> )</p>
                 <button @click="download" class="downloadBtn">Download</button>
                 <label for="file-upload" class="uploadBtn">    
                     <p>Upload your image</p>                
                 </label>
-                <input type="file" @change="onFileChanged" id="file-upload">                
-            </div>   
-        </section>
+                <input type="file" @change="onFileChanged" id="file-upload">  
+            </div>
+        </span>
     `,
     data(){
         return{
-           filterName:[
-               {
-                    name:"saturate",
-                    value:50
-               }
-            ],
-            selectedFile:'images/people2.jpg',
-            photoNumber:0              
+            photoNumber:0  
         }
     },
     methods: {
@@ -44,42 +41,76 @@ Vue.component('show-case',{
             link.download = "image"+ this.photoNumber +".png"
             link.click()
         
-            /*var w=window.open('about:blank','image from canvas')
-            w.document.write(`
-            <h1>
-                <button 
-                    onclick='window.close()'
-                    style="
-                            font-family: 'Questrial', sans-serif;
-                            padding:20px 30px;
-                            border:none;
-                            color:white;
-                            font-size:0.6em;
-                            width:250px;
-                            border-radius:50px;
-                            background:linear-gradient(to right,rgba(44, 130, 201, 1),#9b59b6);
-                ">
-                    Close
-                </button>
-            </h1>
-            `)
-            w.document.write("<img src='"+this.currentImage()+"' style='width:1200px;height:800px;filter:"+this.testFilter+"' alt='from canvas'/> ")*/
         },
         onFileChanged(e){
             const file = e.target.files[0]
-            this.selectedFile = URL.createObjectURL(file)                        
+            this.parentObj.src = URL.createObjectURL(file)                        
         },       
         
     },
-    computed: {  
-          testFilter(){
-              return this.filterName[0].name + '(' + this.filterName[0].value / 20 + ')'
-          },
-          currentImage(){
-            return this.selectedFile
-        }
-          
+    computed:{
+        // currentImage(){
+        //     return this.parentObj.src
+        // },
+        testFilter(){
+             return  (this.parentObj.name == "saturate") ? this.parentObj.value / 20  : this.parentObj.value+"%"
+        },
+    }
+})
+
+Vue.component('showcase-img',{
+    props:{
+        imgSource: String,
+        filterEffect:String,  
+        filterValue:{}      
     },
+    template:`
+        <img :src="imgSource" crossOrigin="Anonymous"  id="myImg" :style="{ filter : filterType}" class="showcase--image" >
+    `,
+    data(){
+        return{
+
+        }
+    },
+    methods:{
+
+    },
+    computed:{
+        filterType(){
+            return this.filterEffect + '('+this.filterValue +')'
+        }
+    }
+})
+
+Vue.component('show-case',{
+    template:`
+        <section>
+            <span v-for="(item,index) in filterName" :key="index">
+                <showcase-item :parentObj="item"></showcase-item>
+            </span>                                   
+        </section>
+    `,
+    data(){
+        return{        
+           filterName:[
+               {
+                    name:"saturate",
+                    src:"images/peopleonroot.jpg",                    
+                    value:50
+               },
+               {
+                   name:"brightness",
+                   src:"images/people2.jpg",                   
+                   value:50
+               }
+            ],
+            //selectedFile:'images/people2.jpg',                    
+        }
+    },        
+          
+          
+          
+ 
     // mounted() {
     //     this.$refs.img.src = this.currentImage
     // },
