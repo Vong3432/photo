@@ -3,18 +3,19 @@
 //import NavItems from "/components/nav-items.vue";
 Vue.component('showcase-item',{
     props:{
-        parentObj:{}
+        parentObj:{},
+        objIndex:Number
     },
     template:`
         <span class="showcase" id="showCaseID">
-            <showcase-img :imgSource="parentObj.src" :filterEffect="parentObj.name" :filterValue="testFilter"/>    
+            <showcase-img :imgSource="parentObj[objIndex].src" :filterEffect="parentObj[objIndex].name" :filterValue="testFilter"/>    
             <div class="showcase--text"> 
                     
-                <h1>Try to adjust the slider to test the {{parentObj.name}} filter.</h1>            
-                <input v-model="parentObj.value" type="range" class="slider">
-                <p id="value">{{parentObj.name}} ( <span class="valueColor">{{ parentObj.value }}</span> )</p>
+                <h1>Try to adjust the slider to test the {{parentObj[objIndex].name}} filter.</h1>            
+                <input v-model="parentObj[objIndex].value" type="range" class="slider">
+                <p id="value">{{parentObj[objIndex].name}} ( <span class="valueColor">{{ parentObj[objIndex].value }}</span> )</p>
                 <button @click="download" class="downloadBtn">Download</button>
-                <label for="file-upload" class="uploadBtn">    
+                <label for="file-upload" class="uploadBtn" @click="onButtonClicked(objIndex)" >    
                     <p>Upload your image</p>                
                 </label>
                 <input type="file" @change="onFileChanged" id="file-upload">  
@@ -22,7 +23,8 @@ Vue.component('showcase-item',{
         </span>
     `,
     data(){
-        return{
+        return{      
+            selectedObj:0, 
             photoNumber:0  
         }
     },
@@ -42,20 +44,29 @@ Vue.component('showcase-item',{
             link.click()
         
         },
-        onFileChanged(e){
-            const file = e.target.files[0]
-            this.parentObj.src = URL.createObjectURL(file)                        
+        onFileChanged(e){            
+            const file = e.target.files[0]  
+            console.log(this.selectedObj)          
+            //this.parentObj[1].src = URL.createObjectURL(file)                          
         },       
-        
+        onButtonClicked(objIndex)
+        {
+            this.selectedObj = objIndex             
+        }
     },
     computed:{
         // currentImage(){
         //     return this.parentObj.src
         // },
         testFilter(){
-             return  (this.parentObj.name == "saturate") ? this.parentObj.value / 20  : this.parentObj.value+"%"
+             return  (this.parentObj[this.objIndex].name == "saturate") ? this.parentObj[this.objIndex].value / 20  : this.parentObj[this.objIndex].value * 2 +"%"
         },
     }
+})
+
+Vue.component('showcase-slider',{
+    template:`
+    `
 })
 
 Vue.component('showcase-img',{
@@ -86,7 +97,7 @@ Vue.component('show-case',{
     template:`
         <section>
             <span v-for="(item,index) in filterName" :key="index">
-                <showcase-item :parentObj="item"></showcase-item>
+                <showcase-item :parentObj="filterName" :objIndex="index"></showcase-item>
             </span>                                   
         </section>
     `,
@@ -108,8 +119,9 @@ Vue.component('show-case',{
         }
     },        
           
-          
-          
+    methods:{
+        
+    }          
  
     // mounted() {
     //     this.$refs.img.src = this.currentImage
